@@ -101,8 +101,8 @@ const TodoApp = () => {
     <Box sx={{ display: "flex", justifyContent: "center", padding: 3, minHeight: "100vh", backgroundColor: "#f5f5f5" }}>
       <Grid container spacing={2} sx={{ maxWidth: 600, width: "100%" }}>
         <Grid item xs={12}>
-          <Paper sx={{ padding: 3, backgroundColor: "#fff", boxShadow: 3 }}>
-            <Typography variant="h4" sx={{ marginBottom: 2, textAlign: "center", fontWeight: "bold" }}>
+          <Paper sx={{ padding: 3, backgroundColor: "#fff", boxShadow: 3, borderRadius: 2 }}>
+            <Typography variant="h4" sx={{ marginBottom: 2, textAlign: "center", fontWeight: "bold", color: "#1976d2" }}>
               To-Do List
             </Typography>
 
@@ -113,14 +113,20 @@ const TodoApp = () => {
               fullWidth
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
-              sx={{ marginBottom: 2 }}
+              sx={{ marginBottom: 2, borderRadius: 2 }}
               color="primary"
+              InputProps={{
+                style: {
+                  borderRadius: "20px",
+                  fontSize: "1.1rem",
+                },
+              }}
             />
 
             {/* Priority Dropdown */}
             <FormControl fullWidth sx={{ marginBottom: 2 }}>
-              <InputLabel>Priority</InputLabel>
-              <Select value={priority} onChange={(e) => setPriority(e.target.value)}>
+              <InputLabel >Priority</InputLabel>
+              <Select value={priority} onChange={(e) => setPriority(e.target.value)} sx={{ borderRadius: 2,marginTop: 1 }}>
                 <MenuItem value="Low">Low</MenuItem>
                 <MenuItem value="Medium">Medium</MenuItem>
                 <MenuItem value="High">High</MenuItem>
@@ -133,7 +139,16 @@ const TodoApp = () => {
               color="primary"
               onClick={handleAddTask}
               fullWidth
-              sx={{ marginBottom: 3, borderRadius: "20px" }}
+              sx={{
+                marginBottom: 3,
+                borderRadius: "20px",
+                fontWeight: "bold",
+                textTransform: "none",
+                backgroundColor: "#1976d2",
+                "&:hover": {
+                  backgroundColor: "#1565c0",
+                },
+              }}
             >
               Add Task
             </Button>
@@ -141,7 +156,7 @@ const TodoApp = () => {
             {/* Filter Tasks */}
             <FormControl fullWidth sx={{ marginBottom: 3 }}>
               <InputLabel>Filter Tasks</InputLabel>
-              <Select value={filter} onChange={(e) => setFilter(e.target.value)}>
+              <Select value={filter} onChange={(e) => setFilter(e.target.value)} sx={{ borderRadius: 2,marginTop: 1 }}>
                 <MenuItem value="All">All</MenuItem>
                 <MenuItem value="Active">Active</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
@@ -159,7 +174,12 @@ const TodoApp = () => {
               color="secondary"
               onClick={handleClearCompleted}
               fullWidth
-              sx={{ marginBottom: 3, borderRadius: "20px" }}
+              sx={{
+                marginBottom: 3,
+                borderRadius: "20px",
+                fontWeight: "bold",
+                textTransform: "none",
+              }}
             >
               Clear Completed Tasks
             </Button>
@@ -169,12 +189,26 @@ const TodoApp = () => {
             {/* List of tasks */}
             <List sx={{ textAlign: "left", padding: 0 }}>
               {filteredTasks.map((task) => (
-                <ListItem key={task.id} sx={{ paddingLeft: 0, display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #ddd" }}>
+                <ListItem
+                  key={task.id}
+                  sx={{
+                    paddingLeft: 0,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    borderBottom: "1px solid #ddd",
+                    backgroundColor: task.completed ? "#f1f8e9" : "#ffffff",
+                    "&:hover": {
+                      backgroundColor: "#f0f0f0",
+                    },
+                  }}
+                >
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Checkbox
                       checked={task.completed}
                       onChange={() => handleToggleCompletion(task.id)}
                       color="primary"
+                      sx={{ marginRight: 2 }}
                     />
                     {editingTaskId === task.id ? (
                       <TextField
@@ -183,6 +217,7 @@ const TodoApp = () => {
                         onBlur={handleSaveEditedTask}
                         fullWidth
                         autoFocus
+                        sx={{ borderRadius: 2 }}
                       />
                     ) : (
                       <ListItemText
@@ -196,10 +231,10 @@ const TodoApp = () => {
                     )}
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <IconButton edge="end" color="error" onClick={() => handleDeleteTask(task.id)}>
+                    <IconButton edge="end" color="error" onClick={() => handleDeleteTask(task.id)} sx={{ marginLeft: 1 }}>
                       <Delete />
                     </IconButton>
-                    <IconButton edge="end" color="default" onClick={() => handleEditTask(task.id)}>
+                    <IconButton edge="end" color="default" onClick={() => handleEditTask(task.id)} sx={{ marginLeft: 1 }}>
                       <Edit />
                     </IconButton>
                   </Box>
