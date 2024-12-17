@@ -16,7 +16,7 @@ body {
     table-layout: fixed;
   }
   
-  .calendar-table th,
+ 
   .calendar-table td {
     border: 1px solid #ddd;
     height: 100px;
@@ -27,6 +27,9 @@ body {
     background-color: #f0f0f0;
     color: #333;
     font-weight: bold;
+    border: 1px solid #ddd;
+    height: 50px;
+    vertical-align: top;
   }
   
   .calendar-cell {

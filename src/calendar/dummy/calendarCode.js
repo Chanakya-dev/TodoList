@@ -119,6 +119,7 @@ const CalendarCode = () => {
         );
       })}
 
+
       {/* Modal for Event Details */}
       {selectedEvent && (
         <div className="modal-overlay" onClick={closeModal}>
