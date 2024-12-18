@@ -2,44 +2,95 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  background-color: black !important;  /* Force background to black */
+  color: #333;
+  overflow-y: hidden;
+  min-height: 100vh;
 }
 
+/* Todo App Container */
 .todo-app {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  padding: 20px;
+  background-color: transparent;  /* Transparent background to ensure body color shows */
 }
 
+.header-row {
+  display: flex;
+  align-items: center; /* Vertically align the items */
+  gap: 10px; /* Add spacing between the arrow and the text */
+  margin-bottom: 15px; /* Add some space below the header row */
+}
+
+.header-row h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 24px; /* Adjust font size for the heading */
+  color: #1976d2; /* Match the color scheme */
+  flex-grow: 1; /* Ensure the header takes up available space */
+}
+
+/* Header Styling */
 h2 {
   text-align: center;
   color: #1976d2;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 /* Dashboard Styling */
 .dashboard {
-  height: 90vh;
+  height: auto;
   background: #ffffff;
   padding: 20px;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .dashboard ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
+/* Task Item Styling */
 .task-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.task-item:hover {
+  background: #f1f1f1;
+}
+
+.task-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.task-content strong {
+  margin-right: 20px;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-actions input[type="checkbox"] {
+  cursor: pointer;
 }
 
 .task-item button {
@@ -49,27 +100,40 @@ h2 {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
+.task-item button:hover {
+  background: #1565c0;
+}
+
+/* Add Button */
 .add-btn {
   background: #1976d2;
   color: white;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.2s;
 }
 
-/* Add/Edit Task Styling */
+.add-btn:hover {
+  background: #1565c0;
+}
+
+/* Form Container (Add/Edit Task) */
 .form-container {
   background: #ffffff;
   padding: 20px;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: 90vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .form-container input,
@@ -79,12 +143,17 @@ h2 {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  box-sizing: border-box;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .form-buttons {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .form-buttons button {
@@ -93,16 +162,126 @@ h2 {
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.2s;
 }
 
 .form-buttons button:first-child {
   background: #1976d2;
 }
 
-.cancel-btn {
+.form-buttons button:first-child:hover {
+  background: #1565c0;
+}
+
+.cancel-btn,
+.delete-btn {
   background: #f44336;
 }
 
-.delete-btn {
-  background: #f44336;
+.cancel-btn:hover,
+.delete-btn:hover {
+  background: #d32f2f;
+}
+
+/* Task Details Styling */
+.details-container {
+  background: #ffffff;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+}
+
+.details-row strong {
+  color: #1976d2;
+  width: 35%;
+  font-weight: bold;
+}
+
+.details-row p {
+  width: 60%;
+  margin: 0;
+  color: #555;
+  word-wrap: break-word;
+}
+
+.details-container button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.details-container button:hover {
+  background-color: #1565c0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .dashboard,
+  .form-container,
+  .details-container {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 15px;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-actions {
+    margin-top: 10px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .button-container button {
+    flex: 1;
+    padding: 6px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .back-btn {
+    background-color: #1976d2; /* Blue */
+    
+  }
+
+  .edit-btn {
+    background-color: #f44336; /* Red */
+  }
 }
