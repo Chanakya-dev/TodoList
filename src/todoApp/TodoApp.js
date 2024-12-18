@@ -118,7 +118,6 @@ const TodoAppNew = () => {
   // Render Edit Task View
   const renderEditTask = () => (
     <div className="form-container">
-      <button onClick={() => setView("dashboard")}>Back to Dashboard</button>
       <h2>Edit Task</h2>
       <input
         type="text"
